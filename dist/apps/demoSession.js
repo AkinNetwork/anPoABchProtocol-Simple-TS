@@ -11,10 +11,12 @@ class DemoSessionApp {
         if (action === "create") {
             if (!payload.serviceId)
                 return { ok: false, error: "serviceId required" };
-            if (!Array.isArray(payload.participants))
+            if (!Array.isArray(payload.participants)) {
                 return { ok: false, error: "participants[] required" };
-            if (!Array.isArray(payload.requiredSigners))
+            }
+            if (!Array.isArray(payload.requiredSigners)) {
                 return { ok: false, error: "requiredSigners[] required" };
+            }
             return { ok: true };
         }
         if (action === "sign") {
@@ -38,7 +40,7 @@ class DemoSessionApp {
                 participants: payload.participants,
                 requiredSigners: payload.requiredSigners,
                 signaturesCollected: Object.fromEntries(payload.requiredSigners.map((p) => [p, false])),
-                status: "pending"
+                status: "pending",
             };
         }
         else if (action === "sign") {

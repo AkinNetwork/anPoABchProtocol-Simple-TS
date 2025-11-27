@@ -1,0 +1,53 @@
+classDiagram
+
+  class Signature {
+    +signer: string
+    +sig: string
+  }
+
+  class Transaction {
+    +id: string
+    +chainId: string
+    +app: string
+    +sender: string
+    +payload: object
+    +timestamp: number
+  }
+
+  class Block {
+    +index: number
+    +timestamp: number
+    +prevHash: string
+    +validator: string
+    +blockHash: string
+    +validatorSignature: string
+  }
+
+  class AkinApp {
+    +name: string
+    +validate(tx, state)
+    +apply(tx, state)
+  }
+
+  class AkinChain {
+    +chainId: string
+    +validators: list
+    +blocks: list
+    +pending: list
+    +apps: map
+    +appStates: map
+    +addTx(tx)
+    +proposeBlock(validator)
+    +isValidChain()
+  }
+
+  class DemoSessionApp {
+    +name: string
+    +validate(tx, state)
+    +apply(tx, state)
+  }
+
+  Signature --> Transaction : used by
+  Transaction --> Block : contained in
+  Block --> AkinChain : contained in
+  AkinApp <|-- DemoSessionApp

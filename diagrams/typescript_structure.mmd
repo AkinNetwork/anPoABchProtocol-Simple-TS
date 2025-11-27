@@ -1,0 +1,22 @@
+flowchart LR
+
+    subgraph "TypeScript Implementation"
+        subgraph "Core Layer"
+            TS_CHAIN["core/chain.ts\n(AkinChain, Block, Tx)"]
+        end
+
+        subgraph "Apps Layer"
+            TS_APP["apps/demoSession.ts\n(DemoSessionApp)"]
+        end
+
+        subgraph "Utils Layer"
+            TS_HASH["utils/hashing.ts\n(canonicalJson, hashJson)"]
+        end
+
+        TS_DEMO["demo.ts\n(Demo driver)"]
+    end
+
+    TS_DEMO --> TS_CHAIN
+    TS_DEMO --> TS_APP
+    TS_APP --> TS_CHAIN
+    TS_HASH --> TS_CHAIN
